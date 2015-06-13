@@ -33,6 +33,8 @@ namespace ProjectSRIR.localhost {
         
         private System.Threading.SendOrPostCallback AddIntOperationCompleted;
         
+        private System.Threading.SendOrPostCallback SubIntOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -76,6 +78,9 @@ namespace ProjectSRIR.localhost {
         
         /// <remarks/>
         public event AddIntCompletedEventHandler AddIntCompleted;
+        
+        /// <remarks/>
+        public event SubIntCompletedEventHandler SubIntCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -132,6 +137,37 @@ namespace ProjectSRIR.localhost {
             if ((this.AddIntCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.AddIntCompleted(this, new AddIntCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SubInt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int SubInt(int a, int b) {
+            object[] results = this.Invoke("SubInt", new object[] {
+                        a,
+                        b});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SubIntAsync(int a, int b) {
+            this.SubIntAsync(a, b, null);
+        }
+        
+        /// <remarks/>
+        public void SubIntAsync(int a, int b, object userState) {
+            if ((this.SubIntOperationCompleted == null)) {
+                this.SubIntOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSubIntOperationCompleted);
+            }
+            this.InvokeAsync("SubInt", new object[] {
+                        a,
+                        b}, this.SubIntOperationCompleted, userState);
+        }
+        
+        private void OnSubIntOperationCompleted(object arg) {
+            if ((this.SubIntCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SubIntCompleted(this, new SubIntCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -193,6 +229,32 @@ namespace ProjectSRIR.localhost {
         private object[] results;
         
         internal AddIntCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void SubIntCompletedEventHandler(object sender, SubIntCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SubIntCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SubIntCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

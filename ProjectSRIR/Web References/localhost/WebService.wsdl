@@ -27,6 +27,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="SubInt">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="a" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="b" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubIntResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SubIntResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -41,6 +56,12 @@
   <wsdl:message name="AddIntSoapOut">
     <wsdl:part name="parameters" element="tns:AddIntResponse" />
   </wsdl:message>
+  <wsdl:message name="SubIntSoapIn">
+    <wsdl:part name="parameters" element="tns:SubInt" />
+  </wsdl:message>
+  <wsdl:message name="SubIntSoapOut">
+    <wsdl:part name="parameters" element="tns:SubIntResponse" />
+  </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -49,6 +70,10 @@
     <wsdl:operation name="AddInt">
       <wsdl:input message="tns:AddIntSoapIn" />
       <wsdl:output message="tns:AddIntSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubInt">
+      <wsdl:input message="tns:SubIntSoapIn" />
+      <wsdl:output message="tns:SubIntSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
@@ -71,6 +96,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SubInt">
+      <soap:operation soapAction="http://tempuri.org/SubInt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -85,6 +119,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddInt">
       <soap12:operation soapAction="http://tempuri.org/AddInt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubInt">
+      <soap12:operation soapAction="http://tempuri.org/SubInt" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
