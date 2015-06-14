@@ -42,20 +42,47 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SqlMeth">
-        <s:complexType />
-      </s:element>
-      <s:element name="SqlMethResponse">
+      <s:element name="MnozInt">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SqlMethResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="a" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="b" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MnozIntResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MnozIntResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DzielInt">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="a" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="b" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DzielIntResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DzielIntResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DateDays">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userdate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DateDaysResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DateDaysResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -79,11 +106,23 @@
   <wsdl:message name="SubIntSoapOut">
     <wsdl:part name="parameters" element="tns:SubIntResponse" />
   </wsdl:message>
-  <wsdl:message name="SqlMethSoapIn">
-    <wsdl:part name="parameters" element="tns:SqlMeth" />
+  <wsdl:message name="MnozIntSoapIn">
+    <wsdl:part name="parameters" element="tns:MnozInt" />
   </wsdl:message>
-  <wsdl:message name="SqlMethSoapOut">
-    <wsdl:part name="parameters" element="tns:SqlMethResponse" />
+  <wsdl:message name="MnozIntSoapOut">
+    <wsdl:part name="parameters" element="tns:MnozIntResponse" />
+  </wsdl:message>
+  <wsdl:message name="DzielIntSoapIn">
+    <wsdl:part name="parameters" element="tns:DzielInt" />
+  </wsdl:message>
+  <wsdl:message name="DzielIntSoapOut">
+    <wsdl:part name="parameters" element="tns:DzielIntResponse" />
+  </wsdl:message>
+  <wsdl:message name="DateDaysSoapIn">
+    <wsdl:part name="parameters" element="tns:DateDays" />
+  </wsdl:message>
+  <wsdl:message name="DateDaysSoapOut">
+    <wsdl:part name="parameters" element="tns:DateDaysResponse" />
   </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
     <wsdl:operation name="HelloWorld">
@@ -98,9 +137,17 @@
       <wsdl:input message="tns:SubIntSoapIn" />
       <wsdl:output message="tns:SubIntSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="SqlMeth">
-      <wsdl:input message="tns:SqlMethSoapIn" />
-      <wsdl:output message="tns:SqlMethSoapOut" />
+    <wsdl:operation name="MnozInt">
+      <wsdl:input message="tns:MnozIntSoapIn" />
+      <wsdl:output message="tns:MnozIntSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DzielInt">
+      <wsdl:input message="tns:DzielIntSoapIn" />
+      <wsdl:output message="tns:DzielIntSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DateDays">
+      <wsdl:input message="tns:DateDaysSoapIn" />
+      <wsdl:output message="tns:DateDaysSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
@@ -132,8 +179,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SqlMeth">
-      <soap:operation soapAction="http://tempuri.org/SqlMeth" style="document" />
+    <wsdl:operation name="MnozInt">
+      <soap:operation soapAction="http://tempuri.org/MnozInt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DzielInt">
+      <soap:operation soapAction="http://tempuri.org/DzielInt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DateDays">
+      <soap:operation soapAction="http://tempuri.org/DateDays" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -171,8 +236,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SqlMeth">
-      <soap12:operation soapAction="http://tempuri.org/SqlMeth" style="document" />
+    <wsdl:operation name="MnozInt">
+      <soap12:operation soapAction="http://tempuri.org/MnozInt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DzielInt">
+      <soap12:operation soapAction="http://tempuri.org/DzielInt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DateDays">
+      <soap12:operation soapAction="http://tempuri.org/DateDays" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

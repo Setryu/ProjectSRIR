@@ -20,7 +20,6 @@ namespace ProjectSRIR.localhost {
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
-    using System.Data;
     
     
     /// <remarks/>
@@ -36,7 +35,11 @@ namespace ProjectSRIR.localhost {
         
         private System.Threading.SendOrPostCallback SubIntOperationCompleted;
         
-        private System.Threading.SendOrPostCallback SqlMethOperationCompleted;
+        private System.Threading.SendOrPostCallback MnozIntOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback DzielIntOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback DateDaysOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -86,7 +89,13 @@ namespace ProjectSRIR.localhost {
         public event SubIntCompletedEventHandler SubIntCompleted;
         
         /// <remarks/>
-        public event SqlMethCompletedEventHandler SqlMethCompleted;
+        public event MnozIntCompletedEventHandler MnozIntCompleted;
+        
+        /// <remarks/>
+        public event DzielIntCompletedEventHandler DzielIntCompleted;
+        
+        /// <remarks/>
+        public event DateDaysCompletedEventHandler DateDaysCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -178,29 +187,93 @@ namespace ProjectSRIR.localhost {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SqlMeth", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet SqlMeth() {
-            object[] results = this.Invoke("SqlMeth", new object[0]);
-            return ((System.Data.DataSet)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/MnozInt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int MnozInt(int a, int b) {
+            object[] results = this.Invoke("MnozInt", new object[] {
+                        a,
+                        b});
+            return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void SqlMethAsync() {
-            this.SqlMethAsync(null);
+        public void MnozIntAsync(int a, int b) {
+            this.MnozIntAsync(a, b, null);
         }
         
         /// <remarks/>
-        public void SqlMethAsync(object userState) {
-            if ((this.SqlMethOperationCompleted == null)) {
-                this.SqlMethOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSqlMethOperationCompleted);
+        public void MnozIntAsync(int a, int b, object userState) {
+            if ((this.MnozIntOperationCompleted == null)) {
+                this.MnozIntOperationCompleted = new System.Threading.SendOrPostCallback(this.OnMnozIntOperationCompleted);
             }
-            this.InvokeAsync("SqlMeth", new object[0], this.SqlMethOperationCompleted, userState);
+            this.InvokeAsync("MnozInt", new object[] {
+                        a,
+                        b}, this.MnozIntOperationCompleted, userState);
         }
         
-        private void OnSqlMethOperationCompleted(object arg) {
-            if ((this.SqlMethCompleted != null)) {
+        private void OnMnozIntOperationCompleted(object arg) {
+            if ((this.MnozIntCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SqlMethCompleted(this, new SqlMethCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.MnozIntCompleted(this, new MnozIntCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/DzielInt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int DzielInt(int a, int b) {
+            object[] results = this.Invoke("DzielInt", new object[] {
+                        a,
+                        b});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void DzielIntAsync(int a, int b) {
+            this.DzielIntAsync(a, b, null);
+        }
+        
+        /// <remarks/>
+        public void DzielIntAsync(int a, int b, object userState) {
+            if ((this.DzielIntOperationCompleted == null)) {
+                this.DzielIntOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDzielIntOperationCompleted);
+            }
+            this.InvokeAsync("DzielInt", new object[] {
+                        a,
+                        b}, this.DzielIntOperationCompleted, userState);
+        }
+        
+        private void OnDzielIntOperationCompleted(object arg) {
+            if ((this.DzielIntCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.DzielIntCompleted(this, new DzielIntCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/DateDays", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string DateDays(string userdate) {
+            object[] results = this.Invoke("DateDays", new object[] {
+                        userdate});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void DateDaysAsync(string userdate) {
+            this.DateDaysAsync(userdate, null);
+        }
+        
+        /// <remarks/>
+        public void DateDaysAsync(string userdate, object userState) {
+            if ((this.DateDaysOperationCompleted == null)) {
+                this.DateDaysOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDateDaysOperationCompleted);
+            }
+            this.InvokeAsync("DateDays", new object[] {
+                        userdate}, this.DateDaysOperationCompleted, userState);
+        }
+        
+        private void OnDateDaysOperationCompleted(object arg) {
+            if ((this.DateDaysCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.DateDaysCompleted(this, new DateDaysCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -303,26 +376,78 @@ namespace ProjectSRIR.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
-    public delegate void SqlMethCompletedEventHandler(object sender, SqlMethCompletedEventArgs e);
+    public delegate void MnozIntCompletedEventHandler(object sender, MnozIntCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SqlMethCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class MnozIntCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal SqlMethCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal MnozIntCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public System.Data.DataSet Result {
+        public int Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataSet)(this.results[0]));
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void DzielIntCompletedEventHandler(object sender, DzielIntCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DzielIntCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal DzielIntCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void DateDaysCompletedEventHandler(object sender, DateDaysCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DateDaysCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal DateDaysCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
             }
         }
     }
