@@ -20,6 +20,7 @@ namespace ProjectSRIR.localhost {
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
+    using System.Data;
     
     
     /// <remarks/>
@@ -34,6 +35,8 @@ namespace ProjectSRIR.localhost {
         private System.Threading.SendOrPostCallback AddIntOperationCompleted;
         
         private System.Threading.SendOrPostCallback SubIntOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SqlMethOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -81,6 +84,9 @@ namespace ProjectSRIR.localhost {
         
         /// <remarks/>
         public event SubIntCompletedEventHandler SubIntCompleted;
+        
+        /// <remarks/>
+        public event SqlMethCompletedEventHandler SqlMethCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -168,6 +174,33 @@ namespace ProjectSRIR.localhost {
             if ((this.SubIntCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SubIntCompleted(this, new SubIntCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SqlMeth", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet SqlMeth() {
+            object[] results = this.Invoke("SqlMeth", new object[0]);
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SqlMethAsync() {
+            this.SqlMethAsync(null);
+        }
+        
+        /// <remarks/>
+        public void SqlMethAsync(object userState) {
+            if ((this.SqlMethOperationCompleted == null)) {
+                this.SqlMethOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSqlMethOperationCompleted);
+            }
+            this.InvokeAsync("SqlMeth", new object[0], this.SqlMethOperationCompleted, userState);
+        }
+        
+        private void OnSqlMethOperationCompleted(object arg) {
+            if ((this.SqlMethCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SqlMethCompleted(this, new SqlMethCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -264,6 +297,32 @@ namespace ProjectSRIR.localhost {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void SqlMethCompletedEventHandler(object sender, SqlMethCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SqlMethCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SqlMethCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
             }
         }
     }
